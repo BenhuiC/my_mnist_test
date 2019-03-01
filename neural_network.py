@@ -1,7 +1,6 @@
 import os
 import struct
 from datetime import datetime
-from Neural_Network.img_preprocess import read_file_and_convert_to_binary
 from scipy import special
 import matplotlib.pyplot as plt
 import numpy as np
@@ -62,6 +61,14 @@ def load_mnist(path, kind='train'):
     return images, labels
 
 
+def read_file_and_convert_to_binary(filename):
+    img = cv2.imread(filename)
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    ret, binary = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
+    print(ret)
+    return binary
+
+
 start_time = datetime.now()
 
 input_nodes = 784
@@ -112,7 +119,7 @@ while j < len(test_lable):
 ss = np.asarray(score)
 print('score is ', ss.sum() / ss.size)
 
-myimage = read_file_and_convert_to_binary(r'D:\PythonPro\Test\Neural_Network\test.png')
+myimage = read_file_and_convert_to_binary('/worktool/python/Neural_Network/mnist')
 temp = np.asarray(myimage).reshape((1, 784))
 myinput = (temp[0] / 255.0 * 0.99) + 0.01
 myresult = n.query(myinput)
