@@ -61,7 +61,8 @@ def load_mnist(path, kind='train'):
 
     return images, labels
 
-start_time=datetime.now()
+
+start_time = datetime.now()
 
 input_nodes = 784
 hiden_nodes = 200
@@ -86,8 +87,8 @@ while i < len(train_lable):
     n.train(input, target)
     i += 1
 
-end_time=datetime.now()
-print("train take %d Seconds" % (end_time-start_time).total_seconds())
+end_time = datetime.now()
+print("train take %d Seconds" % (end_time - start_time).total_seconds())
 # test_file = open('mnist_test_10.csv', 'r')
 # test_list = test_file.readlines()
 # test_file.close()
@@ -110,6 +111,14 @@ while j < len(test_lable):
 
 ss = np.asarray(score)
 print('score is ', ss.sum() / ss.size)
+
+myimage = read_file_and_convert_to_binary(r'D:\PythonPro\Test\Neural_Network\test.png')
+temp = np.asarray(myimage).reshape((1, 784))
+myinput = (temp[0] / 255.0 * 0.99) + 0.01
+myresult = n.query(myinput)
+tp = np.asarray(myresult)
+t = np.argmax(tp)
+print(t)
 
 '''
 all = test_list[0].split(',')
