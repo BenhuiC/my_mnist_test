@@ -1,7 +1,7 @@
 import os
 import struct
 from datetime import datetime
-
+from Neural_Network.img_preprocess import read_file_and_convert_to_binary
 from scipy import special
 import matplotlib.pyplot as plt
 import numpy as np
